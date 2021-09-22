@@ -1,3 +1,4 @@
+# AHFlipper
 import requests
 a = 1
 Items = []
@@ -46,6 +47,7 @@ if que1 == "1":
     for i in range(len(Items)):
         print(Items[i])
 elif que1 == "2":
+    print("Flip")
     for i in range(totalAuctions):
         getAH(AH)
         a += 1
@@ -58,18 +60,21 @@ elif que1 == "2":
     Items.sort()
     for i in range(len(Items)):
         try:
+            #Checking if item name is equal to the one in front of it
             if Items[i][0] == Items[i+1][0]:
-                if (Items[i][1]) < Items[i+1][1]:
-                    print(Items[i])
-                    if (Items[i][1] < Price) and (Items[i][1] != Items[i+1][1]):
+                #Checing if price + price/5 is less than the one in front of it
+                if (Items[i][1]+Items[i][1]/2) < Items[i+1][1]:
+                    #Checking if the item is less than the budget
+                    if (Items[i][1] < Price):
                         Price = Items[i][1]
-                        itemList.append(Items[i])
+                        itemList.append([Items[i],Items[i+1][1]])
                     else:
                         pass
                 else:
                     pass
             else:
                 Price = Budget
+                pass
         except IndexError:
             pass
     for i in itemList:
